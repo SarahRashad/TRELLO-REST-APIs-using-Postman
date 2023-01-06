@@ -1,0 +1,443 @@
+{
+	"id": "3d288c37-2693-4650-b00a-48baaefe9392",
+	"name": "Trello API Testing",
+	"timestamp": "2023-01-06T17:12:00.934Z",
+	"collection_id": "25058628-859e8dfd-2d17-4136-b205-fd7aba07cf2e",
+	"folder_id": 0,
+	"environment_id": "25058628-c29d126d-29a1-413d-9e3a-221a1d504706",
+	"totalPass": 25,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "27c79383-b3fd-4ca8-976e-fed36b4d83af",
+			"name": "Check Authority with no key or Token",
+			"url": "https://api.trello.com/1/members/me",
+			"time": 493,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 400": true,
+				"Status is Bad Request": true,
+				"Checks invalid token body": true
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status is Bad Request": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Checks invalid token body": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				493
+			],
+			"allTests": [
+				{
+					"Status code is 400": true,
+					"Status is Bad Request": true,
+					"Checks invalid token body": true
+				}
+			]
+		},
+		{
+			"id": "090ee4e8-a1ec-4143-b399-78efe3c418e8",
+			"name": "Create New Organization",
+			"url": "https://api.trello.com/1/organizations?displayName=Learn%20Testing&desc=This%20organization%20aims%20at%20learning%20and%20practicing%20testing&name=learn_testing&key=d7cfa7723f9746a1ba201e064993ae3d&token=ATTAdca3b4ee074d7154ee6f38d4701487594b5228ad0eb543d79ab0dc9984e33636F8FB3861",
+			"time": 447,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Status is OK": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status is OK": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				447
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Status is OK": true
+				}
+			]
+		},
+		{
+			"id": "f1faba55-d879-4cb4-9837-da13f13fb941",
+			"name": "Get Member ID",
+			"url": "https://api.trello.com/1/members/me?key=d7cfa7723f9746a1ba201e064993ae3d&token=ATTAdca3b4ee074d7154ee6f38d4701487594b5228ad0eb543d79ab0dc9984e33636F8FB3861",
+			"time": 224,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Status is OK": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status is OK": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				224
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Status is OK": true
+				}
+			]
+		},
+		{
+			"id": "898a0d68-b93f-4a2f-a65d-7b4dfe129cd5",
+			"name": "Get Organizations for a Member",
+			"url": "https://api.trello.com/1/members/63ac499aa41143004ade2380/organizations?key=d7cfa7723f9746a1ba201e064993ae3d&token=ATTAdca3b4ee074d7154ee6f38d4701487594b5228ad0eb543d79ab0dc9984e33636F8FB3861&filter=all",
+			"time": 897,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Status is OK": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status is OK": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				897
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Status is OK": true
+				}
+			]
+		},
+		{
+			"id": "56823e5d-762a-4cec-939e-65de30c998b9",
+			"name": "Create a Board inside an Organization",
+			"url": "https://api.trello.com/1/boards/?name=API%20Testing%20Course&defaultLists=false&idOrganization=63b85656359fae030f4a39e9&key=d7cfa7723f9746a1ba201e064993ae3d&token=ATTAdca3b4ee074d7154ee6f38d4701487594b5228ad0eb543d79ab0dc9984e33636F8FB3861",
+			"time": 504,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Status is OK": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status is OK": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				504
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Status is OK": true
+				}
+			]
+		},
+		{
+			"id": "16f4f622-796c-4c5f-a7b4-68cf1a94d23b",
+			"name": "Get Boards in an Organization",
+			"url": "https://api.trello.com/1/organizations/63b85656359fae030f4a39e9/boards/?key=d7cfa7723f9746a1ba201e064993ae3d&token=ATTAdca3b4ee074d7154ee6f38d4701487594b5228ad0eb543d79ab0dc9984e33636F8FB3861",
+			"time": 241,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Status is OK": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status is OK": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				241
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Status is OK": true
+				}
+			]
+		},
+		{
+			"id": "8fdd5137-d93b-4920-9832-add5f7cdb204",
+			"name": "Create a list inside a Board",
+			"url": "https://api.trello.com/1/lists?key=d7cfa7723f9746a1ba201e064993ae3d&token=ATTAdca3b4ee074d7154ee6f38d4701487594b5228ad0eb543d79ab0dc9984e33636F8FB3861&name=Done&idBoard=63b8565d3e051b0092728feb",
+			"time": 526,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Status is OK": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status is OK": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				526
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Status is OK": true
+				}
+			]
+		},
+		{
+			"id": "08f87220-eb9a-43be-ad0a-f202c55f4385",
+			"name": "Get Lists on a Board",
+			"url": "https://api.trello.com/1/boards/63b8565d3e051b0092728feb/lists?key=d7cfa7723f9746a1ba201e064993ae3d&token=ATTAdca3b4ee074d7154ee6f38d4701487594b5228ad0eb543d79ab0dc9984e33636F8FB3861",
+			"time": 525,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Status is OK": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status is OK": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				525
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Status is OK": true
+				}
+			]
+		},
+		{
+			"id": "7b01f1c4-73d8-4aab-979f-908b64bb86db",
+			"name": "Archive a List",
+			"url": "https://api.trello.com/1/lists/63b8565ead23eb016ad692e2/closed?key=d7cfa7723f9746a1ba201e064993ae3d&token=ATTAdca3b4ee074d7154ee6f38d4701487594b5228ad0eb543d79ab0dc9984e33636F8FB3861&value=true",
+			"time": 363,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Status is OK": true,
+				"Closed value is true": true,
+				"Check for listID": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status is OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Closed value is true": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check for listID": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				363
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Status is OK": true,
+					"Closed value is true": true,
+					"Check for listID": true
+				}
+			]
+		},
+		{
+			"id": "a1d30543-9f23-4019-b2d8-59a9f4290909",
+			"name": "Delete a Board",
+			"url": "https://api.trello.com/1/boards/63b8565d3e051b0092728feb?key=d7cfa7723f9746a1ba201e064993ae3d&token=ATTAdca3b4ee074d7154ee6f38d4701487594b5228ad0eb543d79ab0dc9984e33636F8FB3861",
+			"time": 1097,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Status is OK": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status is OK": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1097
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Status is OK": true
+				}
+			]
+		},
+		{
+			"id": "6be5543e-4c6e-4551-a3d3-d4f5f3dab3b3",
+			"name": "Delete an Organization",
+			"url": "https://api.trello.com/1/organizations/63b85656359fae030f4a39e9?key=d7cfa7723f9746a1ba201e064993ae3d&token=ATTAdca3b4ee074d7154ee6f38d4701487594b5228ad0eb543d79ab0dc9984e33636F8FB3861",
+			"time": 903,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Status is OK": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status is OK": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				903
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Status is OK": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 6220,
+	"collection": {
+		"requests": [
+			{
+				"id": "27c79383-b3fd-4ca8-976e-fed36b4d83af",
+				"method": "GET"
+			},
+			{
+				"id": "090ee4e8-a1ec-4143-b399-78efe3c418e8",
+				"method": "POST"
+			},
+			{
+				"id": "f1faba55-d879-4cb4-9837-da13f13fb941",
+				"method": "GET"
+			},
+			{
+				"id": "898a0d68-b93f-4a2f-a65d-7b4dfe129cd5",
+				"method": "GET"
+			},
+			{
+				"id": "56823e5d-762a-4cec-939e-65de30c998b9",
+				"method": "POST"
+			},
+			{
+				"id": "16f4f622-796c-4c5f-a7b4-68cf1a94d23b",
+				"method": "GET"
+			},
+			{
+				"id": "8fdd5137-d93b-4920-9832-add5f7cdb204",
+				"method": "POST"
+			},
+			{
+				"id": "08f87220-eb9a-43be-ad0a-f202c55f4385",
+				"method": "GET"
+			},
+			{
+				"id": "7b01f1c4-73d8-4aab-979f-908b64bb86db",
+				"method": "PUT"
+			},
+			{
+				"id": "a1d30543-9f23-4019-b2d8-59a9f4290909",
+				"method": "DELETE"
+			},
+			{
+				"id": "6be5543e-4c6e-4551-a3d3-d4f5f3dab3b3",
+				"method": "DELETE"
+			}
+		]
+	}
+}

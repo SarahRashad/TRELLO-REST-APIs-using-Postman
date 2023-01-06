@@ -1,0 +1,771 @@
+{
+	"info": {
+		"_postman_id": "859e8dfd-2d17-4136-b205-fd7aba07cf2e",
+		"name": "Trello API Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25058628"
+	},
+	"item": [
+		{
+			"name": "Check Authority with no key or Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"/* This tests the \"invalid token\" response body which means you don't have the authority to access this API so need to get your account credentials which will be sent with every request so the server ",
+							"*/",
+							"//Log the response code, status and the response body",
+							"console.log(pm.response.code)",
+							"console.log(pm.response.status)",
+							"console.log(pm.response.text())",
+							"//Assert response code, status and the response text body",
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.expect(pm.response.code).to.equal(400);",
+							"});",
+							"",
+							"console.log(\"response time:\"+pm.response.responseTime+\"ms\")",
+							"",
+							"pm.test(\"Status is Bad Request\", function () {",
+							"    pm.expect(pm.response.status).to.equal(\"Bad Request\");",
+							"});",
+							"",
+							"pm.test(\"Checks invalid token body\", function () {",
+							"    pm.expect(pm.response.text()).to.equal(\"invalid token\");",
+							"});",
+							"",
+							"pm"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/1/members/me",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"1",
+						"members",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Organization",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"/*This tests Trello Create New Organization API",
+							"It calls its corresponding API and checks both the response code and status",
+							"In case of success the created organization ID is assigned to the collection variable \"organizationID\"*/",
+							"",
+							"//Log the status and the response body",
+							"console.log(pm.response.status)",
+							"console.log(pm.response.json())",
+							"",
+							"//Assert response code and status",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"pm.test(\"Status is OK\", function () {",
+							"    pm.expect(pm.response.status).to.equal(\"OK\");",
+							"});",
+							"console.log(\"response time:\"+pm.response.responseTime+\"ms\")",
+							"//Set the collection varaibale \"organizationID\" to the created organization ID",
+							"pm.collectionVariables.set(\"organizationID\",pm.response.json().id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "digest",
+					"digest": [
+						{
+							"key": "algorithm",
+							"value": "MD5",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/1/organizations?displayName=Learn Testing&desc=This organization aims at learning and practicing testing&name=learn_testing&key={{key}}&token={{token}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"1",
+						"organizations"
+					],
+					"query": [
+						{
+							"key": "displayName",
+							"value": "Learn Testing"
+						},
+						{
+							"key": "desc",
+							"value": "This organization aims at learning and practicing testing"
+						},
+						{
+							"key": "name",
+							"value": "learn_testing"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Member ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"/**",
+							"     * This tests the get Member ID API",
+							"     * It calls its corresponding API and checks both the response code and status",
+							"     * In case of success the returned ID is assigned to the variable  \"memberID\"",
+							"     */",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"pm.test(\"Status is OK\", function () {",
+							"    pm.expect(pm.response.status).to.equal(\"OK\");",
+							"});",
+							"console.log(\"response time:\"+pm.response.responseTime+\"ms\")",
+							"",
+							"pm.collectionVariables.set(\"memberID\",pm.response.json().id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/1/members/me?key={{key}}&token={{token}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"1",
+						"members",
+						"me"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Organizations for a Member",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"/**",
+							"     * This function tests the get Organizations for Member API",
+							"     * It calls its corresponding API and checks both the response code and status",
+							"     */",
+							"console.log(pm.response.status)",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"pm.test(\"Status is OK\", function () {",
+							"    pm.expect(pm.response.status).to.equal(\"OK\");",
+							"});",
+							"",
+							"console.log(\"response time:\"+pm.response.responseTime+\"ms\")",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Example with a full-fledged request",
+							"const getMemberIDRequest = {",
+							"  url: pm.collectionVariables.get(\"BaseURL\")+'/1/members/me?key='+pm.collectionVariables.get(\"key\")+'&token='+pm.collectionVariables.get(\"token\"),",
+							"  method: 'GET'",
+							"};",
+							"// Example with a plain string URL",
+							"pm.sendRequest(getMemberIDRequest, (error, response) => {",
+							"  if (error) {",
+							"    console.log(error);",
+							"  } else {",
+							"      console.log(\"Member ID\");",
+							"      console.log(response);",
+							"      pm.collectionVariables.set(\"memberID\",response.json().id)",
+							"  }",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/1/members/:id/organizations?key={{key}}&token={{token}}&filter=all",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"1",
+						"members",
+						":id",
+						"organizations"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "filter",
+							"value": "all"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{memberID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Board inside an Organization",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"/**",
+							"     * This tests create Board inside an Organization API",
+							"     * It calls its corresponding API and checks both the response code and status",
+							"     * In case of success the returned ID is assigned to the variable  \"boardID\"",
+							"     */",
+							"console.log(pm.response.status)",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"pm.test(\"Status is OK\", function () {",
+							"    pm.expect(pm.response.status).to.equal(\"OK\");",
+							"});",
+							"",
+							"console.log(\"response time:\"+pm.response.responseTime+\"ms\")",
+							"pm.collectionVariables.set(\"boardID\",pm.response.json().id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/1/boards/?name=API Testing Course&defaultLists=false&idOrganization={{organizationID}}&key={{key}}&token={{token}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "API Testing Course"
+						},
+						{
+							"key": "defaultLists",
+							"value": "false"
+						},
+						{
+							"key": "idOrganization",
+							"value": "{{organizationID}}"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Boards in an Organization",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"/**",
+							"     * This tests the get Boards for an Organization API",
+							"     * It calls its corresponding API and checks both the response code and status",
+							"     */",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"pm.test(\"Status is OK\", function () {",
+							"    pm.expect(pm.response.status).to.equal(\"OK\");",
+							"});",
+							"",
+							"console.log(\"response time:\"+pm.response.responseTime+\"ms\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/1/organizations/:id/boards/?key={{key}}&token={{token}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"1",
+						"organizations",
+						":id",
+						"boards",
+						""
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{organizationID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a list inside a Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"/**",
+							"     * This function tests create List inside a Board API",
+							"     * It calls its corresponding API and checks both the response code and status",
+							"     * In case of success the returned ID is assigned to the variable  \"listID\"",
+							"     */",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"pm.test(\"Status is OK\", function () {",
+							"    pm.expect(pm.response.status).to.equal(\"OK\");",
+							"});",
+							"console.log(\"response time:\"+pm.response.responseTime+\"ms\")",
+							"pm.collectionVariables.set(\"listID\",pm.response.json().id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/1/lists?key={{key}}&token={{token}}&name=Done&idBoard={{boardID}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"1",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "name",
+							"value": "Done"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{boardID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Lists on a Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"/**",
+							"     * This function tests the get Lists for a Board API",
+							"     * It calls its corresponding API and checks both the response code and status",
+							"     */",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"pm.test(\"Status is OK\", function () {",
+							"    pm.expect(pm.response.status).to.equal(\"OK\");",
+							"});",
+							"",
+							"console.log(\"response time:\"+pm.response.responseTime+\"ms\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BaseURL}}/1/boards/:id/lists?key={{key}}&token={{token}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						":id",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{boardID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Archive a List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"/**",
+							"     * This function tests the archive List API",
+							"     * It calls its corresponding API and checks both the response code and status",
+							"     * list closed status is true and the list ID",
+							"     */",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"pm.test(\"Status is OK\", function () {",
+							"    pm.expect(pm.response.status).to.equal(\"OK\");",
+							"});",
+							"",
+							"pm.test(\"Closed value is true\", function () {",
+							"    pm.expect(pm.response.json().closed).to.equal(true);",
+							"});",
+							"pm.test(\"Check for listID\", function () {",
+							"    pm.expect(pm.response.json().id).to.equal(pm.collectionVariables.get(\"listID\"));",
+							"});",
+							"",
+							"console.log(\"response time:\"+pm.response.responseTime+\"ms\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/1/lists/:id/closed?key={{key}}&token={{token}}&value=true",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"1",
+						"lists",
+						":id",
+						"closed"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "value",
+							"value": "true"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{listID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"/**",
+							"     * This function tests the delete Board API",
+							"     * It calls its corresponding API and checks both the response code and status",
+							"     */",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"pm.test(\"Status is OK\", function () {",
+							"    pm.expect(pm.response.status).to.equal(\"OK\");",
+							"});",
+							"",
+							"console.log(\"response time:\"+pm.response.responseTime+\"ms\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/1/boards/:id?key={{key}}&token={{token}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						":id"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{boardID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an Organization",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"/**",
+							"     * This function tests the delete Organization API",
+							"     * It calls its corresponding API and checks both the response code and status",
+							"     */",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"pm.test(\"Status is OK\", function () {",
+							"    pm.expect(pm.response.status).to.equal(\"OK\");",
+							"});",
+							"",
+							"console.log(\"response time:\"+pm.response.responseTime+\"ms\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/1/organizations/:id?key={{key}}&token={{token}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"1",
+						"organizations",
+						":id"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{organizationID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "organizationID",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "memberID",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "boardID",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "listID",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
